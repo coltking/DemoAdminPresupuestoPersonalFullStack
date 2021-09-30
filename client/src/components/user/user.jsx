@@ -15,8 +15,8 @@ const User = () => {
     const [mount, setMount] = useState(0)
     const { idUser } = useParams()
     const dispatch = useDispatch()
-    const username = useSelector(store => store.userReducer.name)
-    const entryData = useSelector(store => store.userReducer.checks)
+    const username = useSelector(store => store.userReducer.user.name)
+    const entryData = useSelector(store => store.userReducer.user.checks)
     const balance = useSelector(store => store.userReducer.balance)
 
     const HandleModalShow = () => {

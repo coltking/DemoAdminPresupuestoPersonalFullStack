@@ -5,6 +5,7 @@ import { CHECK_DELETED, CHECK_UPDATED, SETTING_USER_CHECKS } from './constants'
 export const actionGetUserChecks = (idUser) => {
     return (dispatch) => {
         axios.get(apiUrl + '/user/' + idUser, { withCredentials: true }).then(res => {
+            console.log(res.data)
             dispatch({ type: SETTING_USER_CHECKS, payload: res.data })
         })
     }
