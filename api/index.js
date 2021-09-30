@@ -9,6 +9,6 @@ conn.sync(
 
 ).then(() => {
   server.listen(process.env.PORT || 3001, () => {
-    console.log('Escuchando el puerto '+process.env.PORT) // eslint-disable-line no-console
+    console.log('Escuchando el puerto '+process.env.PORT)
   });
 });
