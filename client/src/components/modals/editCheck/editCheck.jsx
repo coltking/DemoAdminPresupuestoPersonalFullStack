@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react"
 import { Button, Form, Modal } from "react-bootstrap"
 import { useDispatch } from "react-redux"
 import { actionUpdateCheck } from "../../../redux/userActions"
-
-
 const ModalEditCheck = ({ idCheck, initialMount, initialConcept, CloseModal, modalState }) => {
     const [mount, setMount] = useState(0)
     const [concept, setConcept] = useState('')
@@ -16,7 +14,6 @@ const ModalEditCheck = ({ idCheck, initialMount, initialConcept, CloseModal, mod
         <Modal.Header closeButton>
             <Modal.Title>EDITAR ENTRADA</Modal.Title>
         </Modal.Header>
-
         <Modal.Body>
             <Form.Control type='text'
                 value={concept}
@@ -41,7 +38,6 @@ const ModalEditCheck = ({ idCheck, initialMount, initialConcept, CloseModal, mod
                     }
                 }} />
         </Modal.Body>
-
         <Modal.Footer>
             <Button variant="secondary"
                 onClick={() => {
@@ -59,5 +55,4 @@ const ModalEditCheck = ({ idCheck, initialMount, initialConcept, CloseModal, mod
         </Modal.Footer>
     </Modal>
 }
-
 export default ModalEditCheck

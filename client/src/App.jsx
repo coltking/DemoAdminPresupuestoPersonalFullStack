@@ -7,8 +7,6 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import User from './components/user/user'
 import Particles from 'react-particles-js'
 import particlesCFG from './particlesjs-config.json'
-
-
 function App() {
   return (
     <React.Fragment>
@@ -27,5 +25,4 @@ function App() {
     </React.Fragment>
   )
 }
-
 export default App

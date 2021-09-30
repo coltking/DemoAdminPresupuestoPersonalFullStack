@@ -1,8 +1,8 @@
 import React from 'react'
 import { Fragment } from 'react'
 import { Col } from 'react-bootstrap'
-import CreateUserForm from '../createUserForm/createUserForm';
-import UsersList from '../usersList/usersList';
+import CreateUserForm from '../createUserForm/createUserForm'
+import UsersList from '../usersList/usersList'
 import './home.css'
 const Home = () => {
     return <Fragment>

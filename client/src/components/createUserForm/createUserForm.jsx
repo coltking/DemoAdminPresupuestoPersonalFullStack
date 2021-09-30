@@ -2,7 +2,6 @@ import React, { Fragment, useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import { useDispatch } from 'react-redux'
 import { actionPostNewUser } from '../../redux/homeActions'
-
 const CreateUserForm = () => {
     const dispatch = useDispatch()
     const [name, setName] = useState('')
@@ -24,6 +23,4 @@ const CreateUserForm = () => {
         </Form>
     </Fragment>
 }
-
 export default CreateUserForm
-

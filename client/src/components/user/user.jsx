@@ -1,11 +1,10 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import React, {useEffect, useState } from 'react'
 import { Button, Col, Form, Row } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { actionDeleteCheck, actionGetUserChecks, actionPostUserCheck } from '../../redux/userActions'
 import { PencilSquare, Trash } from 'react-bootstrap-icons'
 import ModalEditCheck from '../modals/editCheck/editCheck'
-
 const User = () => {
     const [concept, setConcept] = useState('')
     const [modalShow, setModalShow] = useState(false)
@@ -18,7 +17,6 @@ const User = () => {
     const username = useSelector(store => store.userReducer.user.name)
     const entryData = useSelector(store => store.userReducer.user.checks)
     const balance = useSelector(store => store.userReducer.balance)
-
     const HandleModalShow = () => {
         setModalShow(!modalShow);
         setTimeout(() => {
@@ -26,7 +24,6 @@ const User = () => {
         }, 200)
     }
     const HandleClick = async () => {
-        //la proxima controlar que el idUser venga del lugar correcto en lugar del url por seguridad
         await dispatch(actionPostUserCheck(idUser, concept, mount))
         await setConcept('');
         await setMount(0);
@@ -34,11 +31,9 @@ const User = () => {
     }
     const HandleDelete = (idCheck) => {
         dispatch(actionDeleteCheck(idCheck))
-        console.log("delete");
         setTimeout(() => {
             return dispatch(actionGetUserChecks(idUser))
         }, 200)
-        console.log("getChecks");
     }
     useEffect(() => {
         dispatch(actionGetUserChecks(idUser))
@@ -151,5 +146,4 @@ const User = () => {
         </Col>
     </Col>
 }
-
 export default User

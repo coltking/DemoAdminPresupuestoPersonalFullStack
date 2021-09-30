@@ -1,5 +1,4 @@
 import { CHECK_DELETED, CHECK_UPDATED, SETTING_USER_CHECKS } from "./constants"
-
 const initialState = {
     user: {
         name: '',
@@ -7,7 +6,6 @@ const initialState = {
     },
     balance: 0
 }
-
 const userReducer = (state = initialState, action) => {
     switch (action.type) {
         case CHECK_UPDATED:
