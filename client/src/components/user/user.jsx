@@ -49,7 +49,7 @@ const User = () => {
             <h3 className='text-center'>{username}</h3>
         </Row>
         <Row className='justify-content-center'>
-            <h4 className='text-center'>Saldo actual: ${balance}</h4>
+            <h4 className='text-center'>Saldo actual: ${balance.toFixed(2)}</h4>
         </Row>
         <Col>
             <Row>
@@ -63,7 +63,7 @@ const User = () => {
                 if (entry.entry > 0) {
                     return <Row className={'justify-content-center ingreso'} key={entry.updatedAt + index}>
                         <Col className='text-center'>{entry.concepto}</Col>
-                        <Col className='text-center'>{entry.entry}</Col>
+                        <Col className='text-center'>${entry.entry.toFixed(2)}</Col>
                         <Col className='text-center'>{new Date(entry.updatedAt).toLocaleDateString('es-ES', { hour: 'numeric', minute: 'numeric', second: 'numeric' })}</Col>
                         <Col className='text-center'>INGRESO</Col>
                         <Col className='text-center'>
@@ -139,11 +139,14 @@ const User = () => {
                     </fieldset>
                 </Col>
                 <Col>
-                    <Button className='text-center'
-                        variant='primary'
-                        onClick={() => {
-                            HandleClick()
-                        }}>AGREGAR</Button></Col>
+                    <fieldset className='text-center'>
+                        <Button className='text-center'
+                            variant='primary'
+                            onClick={() => {
+                                HandleClick()
+                            }}>AGREGAR</Button>
+                    </fieldset>
+                </Col>
             </Row>
         </Col>
     </Col>

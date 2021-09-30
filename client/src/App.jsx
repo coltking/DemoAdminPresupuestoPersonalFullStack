@@ -1,5 +1,5 @@
-import React from 'react'
-import { Route, BrowserRouter as Router, Switch, Redirect } from "react-router-dom"
+import React from 'react';
+import { Route, BrowserRouter as Router, Switch, Redirect } from "react-router-dom";
 import './App.css'
 import { Container } from 'react-bootstrap'
 import Home from './components/home/home'
@@ -21,7 +21,9 @@ function App() {
           </Switch>
         </Router>
       </Container>
-      {/*<Particles params={particlesCFG} />*/}
+      {
+        <Particles params={particlesCFG} />
+      }
     </React.Fragment>
   )
 }

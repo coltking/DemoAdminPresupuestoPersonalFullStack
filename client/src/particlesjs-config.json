@@ -8,7 +8,7 @@
       }
     },
     "color": {
-      "value": "#000000"
+      "value": "#06daff"
     },
     "shape": {
       "type": "circle",
@@ -82,14 +82,14 @@
     },
     "modes": {
       "grab": {
-        "distance": 73.03712720632994,
+        "distance": 100,
         "line_linked": {
-          "opacity": 0.5837039716533623
+          "opacity": 0.5
         }
       },
       "bubble": {
         "distance": 1059.038344491784,
-        "size": 40,
+        "size": 80,
         "duration": 2,
         "opacity": 8,
         "speed": 3

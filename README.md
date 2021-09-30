@@ -66,4 +66,4 @@ Whatsapp:
 https://wa.me/543417197294
 
 
-Este proyecto tiene 14 hrs 32 mins de tiempo de escritura de codigo (solo se mide el tiempo en el que esta siendo utilizado el editor, el tiempo real es mas amplio).
+Este proyecto tiene 15 hrs 36 mins de tiempo de escritura de codigo (solo se mide el tiempo en el que esta siendo utilizado el editor, el tiempo real es mas amplio).

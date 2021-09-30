@@ -19,6 +19,12 @@
   width:100%;
   height:100%;
 }
+.animationButton{
+  position: fixed;
+  z-index: 1000;
+  bottom: 5vh;
+  right: 5vw;
+}
 .col {
   background-color: transparent;
 }
@@ -44,7 +50,12 @@
 .App-link {
   color: #61dafb;
 }
-
+.animationOn {
+  display: block;
+}
+.animationOff {
+  display: none;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
