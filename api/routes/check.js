@@ -2,7 +2,6 @@ const router = require('express').Router();
 const {
   User, Checks
 } = require('../db');
-
 router.post('/:idUser', (req, res, next) => {
   Checks.create({
     idUser: req.params.idUser,

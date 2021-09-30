@@ -1,9 +1,7 @@
 const router = require('express').Router();
-const { Sequelize } = require('sequelize');
 const {
   User, Checks
 } = require('../db');
-
 router.get('/:idUser', (req, res, next) => {
   User.findOne({
     where: {
@@ -32,5 +30,4 @@ router.post('/', (req, res, next) => {
     res.send("usuario " + user.name + " creado")
   })
 })
-
 module.exports = router;
