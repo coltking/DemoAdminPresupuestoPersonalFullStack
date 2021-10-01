@@ -5,7 +5,6 @@ import { Col } from 'react-bootstrap'
 import './home.css'
 import { useSelector } from 'react-redux'
 import User from '../user/user'
-
 //////////////////////////////////// Secondary Function
 const Welcome = () => {
     const history = useHistory()
@@ -19,11 +18,10 @@ const Welcome = () => {
     }
     return <Col className='justify-content-center'>
         <h1 className='text-center title'>Te doy la bienvenida.</h1>
-        <p className='text-center'><a href='' onClick={HandleClickLogin}>inicia sesion </a> o
-            <a href='' onClick={HandleClickRegister}> registrate</a> para comenzar</p>
+        <p className='text-center'><a href='' onClick={HandleClickLogin}>inicia sesion</a> o{" "}
+            <a href='' onClick={HandleClickRegister}>registrate</a> para comenzar</p>
     </Col>
 }
-//////////////////////////////////// END Secondary Function
 //////////////////////////////////// Primary Function
 const Home = () => {
     const name = useSelector(store => store.userReducer.user.name)
@@ -31,5 +29,4 @@ const Home = () => {
         {name === '' ? <Welcome /> : <User />}
     </Fragment>
 }
-//////////////////////////////////// END Primary Function
 export default Home
