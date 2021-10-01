@@ -16,7 +16,7 @@ function Login() {
     }
     return (
         <Fragment>
-        <h5 className='text-center  mt-5'>NUEVO USUARIO</h5>
+        <h5 className='text-center  mt-5'>INICIAR SESION</h5>
         <Form onSubmit={(e) => {
             e.preventDefault()
             if (validateEmail(email)){

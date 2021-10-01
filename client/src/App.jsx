@@ -8,7 +8,7 @@ import User from './components/user/user'
 import Particles from 'react-particles-js'
 import particlesCFG from './particlesjs-config.json'
 import NavBar from './components/navbar/navBar';
-import CreateUserForm from './components/createUserForm/createUserForm';
+import CreateUserForm from './components/Register/createUserForm';
 import Login from './components/login/login';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
