@@ -12,6 +12,15 @@ module.exports = (sequelize) => {
             unique: false,
             allowNull: false,
             required: true,
+        },
+        email: {
+            type: DataTypes.STRING,
+            unique: true,
+            required: true
+        },
+        password: {
+            type: DataTypes.STRING,
+            required: true
         }
     })
 }

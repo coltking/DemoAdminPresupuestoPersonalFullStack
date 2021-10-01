@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { Button, Form, Modal } from "react-bootstrap"
 import { useDispatch } from "react-redux"
+import { toast } from "react-toastify"
 import { actionUpdateCheck } from "../../../redux/userActions"
 const ModalEditCheck = ({ idCheck, initialMount, initialConcept, CloseModal, modalState }) => {
     const [mount, setMount] = useState(0)
@@ -27,13 +28,13 @@ const ModalEditCheck = ({ idCheck, initialMount, initialConcept, CloseModal, mod
                         if (e.target.value < 1) {
                             setMount(e.target.value)
                         } else {
-                            alert("El valor no puede ser positivo.")
+                            toast("El valor no puede ser positivo.")
                         }
                     } else {
                         if (e.target.value >= 1) {
                             setMount(e.target.value)
                         } else {
-                            alert("El valor no puede ser negativo.")
+                            toast("El valor no puede ser negativo.")
                         }
                     }
                 }} />

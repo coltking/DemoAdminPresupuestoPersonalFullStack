@@ -1,10 +1,11 @@
-import React, {useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Col, Form, Row } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { actionDeleteCheck, actionGetUserChecks, actionPostUserCheck } from '../../redux/userActions'
 import { PencilSquare, Trash } from 'react-bootstrap-icons'
 import ModalEditCheck from '../modals/editCheck/editCheck'
+import './user.css'
 const User = () => {
     const [concept, setConcept] = useState('')
     const [modalShow, setModalShow] = useState(false)
@@ -20,11 +21,17 @@ const User = () => {
     const HandleModalShow = () => {
         setModalShow(!modalShow);
         setTimeout(() => {
-            return dispatch(actionGetUserChecks(idUser))
+            return dispatch(actionGetUserChecks())
         }, 200)
     }
+    const HandleEdit = (entry) => {
+            setModalIdCheck(entry.idChecks)
+            setModalInitialConcept(entry.concepto)
+            setModalInitialMount(entry.entry)
+            HandleModalShow()
+    }
     const HandleClick = async () => {
-        await dispatch(actionPostUserCheck(idUser, concept, mount))
+        await dispatch(actionPostUserCheck(concept, mount))
         await setConcept('');
         await setMount(0);
         await dispatch(actionGetUserChecks(idUser))
@@ -54,7 +61,7 @@ const User = () => {
                 <Col className='text-center'>TIPO</Col>
                 <Col></Col>
             </Row>
-            {entryData.map((entry, index) => {
+            {entryData ? entryData.map((entry, index) => {
                 if (entry.entry > 0) {
                     return <Row className={'justify-content-center ingreso'} key={entry.updatedAt + index}>
                         <Col className='text-center'>{entry.concepto}</Col>
@@ -62,45 +69,47 @@ const User = () => {
                         <Col className='text-center'>{new Date(entry.updatedAt).toLocaleDateString('es-ES', { hour: 'numeric', minute: 'numeric', second: 'numeric' })}</Col>
                         <Col className='text-center'>INGRESO</Col>
                         <Col className='text-center'>
-                            <Button variant='warning' onClick={() => {
-                                setModalIdCheck(entry.idChecks)
-                                setModalInitialConcept(entry.concepto)
-                                setModalInitialMount(entry.entry)
-                                HandleModalShow()
-                            }}>
-                                <PencilSquare />
-                            </Button>
-                            <Button variant='danger' onClick={() => {
-                                HandleDelete(entry.idChecks)
-                            }}>
-                                <Trash />
-                            </Button>
+                            <Row className='justify-content-center'>
+                                <Col>
+                                    <Button variant='warning' onClick={() => HandleEdit(entry)}>
+                                        <PencilSquare />
+                                    </Button>
+                                </Col>
+                                <Col>
+                                    <Button variant='danger' onClick={() => {
+                                        HandleDelete(entry.idChecks)
+                                    }}>
+                                        <Trash />
+                                    </Button>
+                                </Col>
+                            </Row>
                         </Col>
                     </Row>
                 } else {
                     return <Row className={'justify-content-center egreso'} key={entry.updatedAt + index}>
                         <Col className='text-center'>{entry.concepto}</Col>
-                        <Col className='text-center'>{entry.entry}</Col>
+                        <Col className='text-center'>${entry.entry}</Col>
                         <Col className='text-center'>{new Date(entry.updatedAt).toLocaleDateString('es-ES', { hour: 'numeric', minute: 'numeric', second: 'numeric' })}</Col>
                         <Col className='text-center'>EGRESO</Col>
                         <Col className='text-center'>
-                            <Button variant='warning' onClick={() => {
-                                setModalIdCheck(entry.idChecks)
-                                setModalInitialConcept(entry.concepto)
-                                setModalInitialMount(entry.entry)
-                                HandleModalShow()
-                            }}>
-                                <PencilSquare />
-                            </Button>
-                            <Button variant='danger' onClick={() => {
-                                HandleDelete(entry.idChecks)
-                            }}>
-                                <Trash />
-                            </Button>
+                            <Row className='justify-content-center'>
+                                <Col>
+                                    <Button variant='warning' onClick={() => HandleEdit(entry)}>
+                                        <PencilSquare />
+                                    </Button>
+                                </Col>
+                                <Col>
+                                    <Button variant='danger' onClick={() => {
+                                        HandleDelete(entry.idChecks)
+                                    }}>
+                                        <Trash />
+                                    </Button>
+                                </Col>
+                            </Row>
                         </Col>
                     </Row>
                 }
-            })}
+            }) : undefined}
             <Row className='text-center'>
                 <Col>NUEVA ENTRADA</Col>
             </Row>

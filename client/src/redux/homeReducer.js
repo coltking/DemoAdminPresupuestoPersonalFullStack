@@ -1,11 +1,11 @@
-import { SETTING_USERS } from "./constants"
+import { SETTING_TOAST } from "./constants"
 const initialState = {
-    users: []
+    toast: ''
 }
 const homeReducer = (state = initialState, action) => {
     switch (action.type) {
-        case SETTING_USERS:
-            return { ...state, users: action.payload }
+        case SETTING_TOAST:
+            return { ...state, toast: action.payload }
         default:
             return state
     }

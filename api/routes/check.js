@@ -2,32 +2,44 @@ const router = require('express').Router();
 const {
   User, Checks
 } = require('../db');
-router.post('/:idUser', (req, res, next) => {
-  Checks.create({
-    idUser: req.params.idUser,
+
+const isAuthenticated = (req, res, next) => {
+  if (req.user) {
+    next()
+  } else {
+    res.status(401).send("User is not authenticated")
+  }
+}
+router.get('/', isAuthenticated, async (req, res, next) => {
+  const checks = await Checks.findAll({
+    where: {
+      idUser: req.user.idUser
+    }
+  })
+  const total = await Checks.sum('entry', { where: { idUser: req.user.idUser } })
+  res.send({ checks, balance: total })
+})
+router.post('/', isAuthenticated, async (req, res, next) => {
+  await Checks.create({
+    idUser: req.user.idUser,
     entry: req.body.entry,
     concepto: req.body.concepto
   })
 })
-router.delete('/:idCheck', async (req, res, next) => {
-  Checks.destroy({ where: { idChecks: req.params.idCheck } }).then(deleted => {
-    res.sendStatus(200)
-  }).catch(error => {
-    console.log(error);
-  })
+router.delete('/:idCheck', isAuthenticated, async (req, res, next) => {
+  const deleted = await Checks.destroy({ where: { idChecks: req.params.idCheck } })
+  console.log("deleted: ", deleted)
+  if (deleted) { res.sendStatus(200) }
 })
-router.put('/:idCheck', (req, res, next) => {
-  Checks.update({
+router.put('/:idCheck', isAuthenticated, async (req, res, next) => {
+  const updated = await Checks.update({
     concepto: req.body.concepto,
     entry: req.body.entry
   }, {
     where: {
       idChecks: req.params.idCheck
     }
-  }).then(update => {
-    res.send(update)
-  }).catch(error => {
-    console.log("put: '/check/idCheck: ",error);
   })
+  res.send(updated)
 })
 module.exports = router;

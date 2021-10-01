@@ -1,0 +1,18 @@
+.ingreso {
+  background-color: #d2ffd2;
+  margin-bottom: 3px;
+  border: 1px;
+  border-radius: 5px;
+  border-style: solid;
+  border-color: black;
+}
+
+.egreso {
+  background-color: #ffd2d2;
+  margin-bottom: 3px;
+  border: 1px;
+  border-radius: 5px;
+  border-style: solid;
+  border-color: black;
+}
+/*# sourceMappingURL=user.css.map */

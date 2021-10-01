@@ -15,10 +15,12 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Credentials', 'true');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
   res.header('Content-Type', 'application/x-www-form-urlencoded',);
-  if (req.methods === 'OPTIONS') return res.send('ok');
+  if (req.methods === 'OPTIONS') {
+    return res.send('ok');
+  }
   next();
 });
 app.use('/', indexRouter);

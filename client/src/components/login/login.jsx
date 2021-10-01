@@ -1,37 +1,39 @@
 import React, { Fragment, useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import { useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { actionPostNewUser } from '../../redux/homeActions'
-const CreateUserForm = () => {
-    const dispatch = useDispatch()
-    const [name, setName] = useState('')
+import { actionPostLogin } from '../../redux/userActions'
+
+function Login() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const dispatch = useDispatch()
+    const history = useHistory()
     const validateEmail = email => {
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(String(email).toLowerCase())
     }
-    return <Fragment>
+    return (
+        <Fragment>
         <h5 className='text-center  mt-5'>NUEVO USUARIO</h5>
         <Form onSubmit={(e) => {
             e.preventDefault()
-            if (name !== '' && password !== '' && email !== '') {
-                if (validateEmail(email)) {
-                    dispatch(actionPostNewUser(name, email, password))
+            if (validateEmail(email)){
+                if (password !== ''){
+                    console.log(email,password);
+                    dispatch(actionPostLogin(email, password))
+                    setTimeout(() => {
+                        return history.push('/')
+                    }, 200);
                 } else {
-                    toast("Email invalido.")
+                    toast("Todos los campos son obligatorios.")
                 }
-            } else {
-                toast("Todos los campos son obligatorios.")
+            }else {
+                toast("Email invalido.")
             }
         }}>
             <Form.Group className="mb-3">
-                <Form.Label>Nombre</Form.Label>
-                <Form.Control type='text' value={name} placeholder='Carlos Castañeda' onChange={(e) => {
-                    e.preventDefault()
-                    setName(e.target.value)
-                }} />
                 <Form.Label>Email</Form.Label>
                 <Form.Control type='text' value={email} placeholder='carlos@castañeda.com' onChange={(e) => {
                     e.preventDefault()
@@ -47,6 +49,8 @@ const CreateUserForm = () => {
                 <Button variant='success' type='submit' size='lg'>Enviar</Button>
             </div>
         </Form>
-    </Fragment >
+    </Fragment>
+    )
 }
-export default CreateUserForm
+
+export default Login

@@ -16,21 +16,13 @@ Los datos de PostgresSQL deben ser modificados en el archivo `api/.env` con la s
     DB_NAME=dbStandardForTest
     PORT=9000
 
-PORT puede no ser configurado ya que `api/index.js` esta configurado de la siguiente manera:
-
-    server.listen(process.env.PORT || 3001, () => {
-        console.log('Escuchando el puerto '+process.env.PORT)
-    });
-
-aunque el resto de los datos son obligatorios para el correcto funcionamiento de la api.
-
-Las rutas estan configuradas en `api/routes/index.js` y los modelos de la base de datos se pueden comprender rapidamente echandole un vistazo a la ruta `api/Models`.
+si no se configura PORT se asignara el puerto `3001` por defecto.
 
 **EL COMANDO PARA EJECUTAR EL SERVIDOR API ES EL SIGUIENTE:**
 
     DEBUG=api:* npm start
 
-_debe estar posicionado dentro del directorio `api/`_
+_se debe estar posicionado dentro del directorio `api/`_
 
 ## __CLIENT__
 
@@ -48,16 +40,17 @@ __EL COMANDO PARA EJECUTAR EL FRONT ES:__
 _debe estar posicionado dentro del directorio `client/`_
 
 
-**_RECUERDE HACER `npm install` tanto en `client/` como en `api/` antes de intentar inicializar, cualquier duda contactarme por cualquiera de estos medios:_**
+**_RECUERDE HACER `npm install` TANTO EN `client/` COMO EN `api/` ANTES DE INICIALIZAR._**
+**_Cualquier duda contactarme por cualquiera de estos medios:_**
 
-Linkedin:
+### Linkedin:
 https://www.linkedin.com/in/juan-bautista-abal-3618a5b5/
 
-Telegram:
+### Telegram:
 https://t.me/holabautista
 
-Whatsapp:
+### Whatsapp:
 https://wa.me/543417197294
 
 
-Este proyecto tiene 15 hrs 36 mins de tiempo de escritura de codigo (solo se mide el tiempo en el que esta siendo utilizado el editor, el tiempo real es mas amplio).
+Este proyecto tiene 26 hrs 11 mins de tiempo de escritura de codigo (solo se mide el tiempo en el que esta siendo utilizado el editor, el tiempo real es mas amplio).

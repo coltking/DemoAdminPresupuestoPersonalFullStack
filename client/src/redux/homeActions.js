@@ -1,19 +1,18 @@
 import axios from 'axios'
-import { SETTING_USERS } from './constants'
+import { toast } from 'react-toastify'
 import { apiUrl } from '../config'
-export const actionGetUsers = () => {
-    return (dispatch) => {
-        axios.get(apiUrl + '/user', { withCredentials: true }).then(res => {
-            dispatch({ type: SETTING_USERS, payload: res.data })
-        })
-    }
+export const actionToast = (text) => {
+    toast(text)
 }
-export const actionPostNewUser = (name) => {
+export const actionPostNewUser = (name,email,password) => {
     return (dispatch) => {
-        axios.post(apiUrl + '/user', { name }, { withCredentials: true }).then(res => {
-            dispatch(actionGetUsers())
+        axios.post(apiUrl + '/user/register', { name,email,password }, { withCredentials: true }).then(res => {
+            dispatch(actionToast("Usuario registrado correctamente."))
         }).catch(error => {
-            console.log(error);
+            console.log(error.message);
+            if (error.message === "Request failed with status code 401") {
+                dispatch(actionToast("El email ya se encuentra registrado."))
+            }
         })
     }
 }
