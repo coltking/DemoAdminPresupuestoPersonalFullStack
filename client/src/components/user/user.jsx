@@ -63,51 +63,9 @@ const User = () => {
             </Row>
             {entryData ? entryData.map((entry, index) => {
                 if (entry.entry > 0) {
-                    return <Row className={'justify-content-center ingreso'} key={entry.updatedAt + index}>
-                        <Col className='text-center'>{entry.concepto}</Col>
-                        <Col className='text-center'>${entry.entry.toFixed(2)}</Col>
-                        <Col className='text-center'>{new Date(entry.updatedAt).toLocaleDateString('es-ES', { hour: 'numeric', minute: 'numeric', second: 'numeric' })}</Col>
-                        <Col className='text-center'>INGRESO</Col>
-                        <Col className='text-center'>
-                            <Row className='justify-content-center'>
-                                <Col>
-                                    <Button variant='warning' onClick={() => HandleEdit(entry)}>
-                                        <PencilSquare />
-                                    </Button>
-                                </Col>
-                                <Col>
-                                    <Button variant='danger' onClick={() => {
-                                        HandleDelete(entry.idChecks)
-                                    }}>
-                                        <Trash />
-                                    </Button>
-                                </Col>
-                            </Row>
-                        </Col>
-                    </Row>
+                    return <Ingreso entry={entry} index={index} HandleEdit={HandleEdit} HandleDelete={HandleDelete}/>
                 } else {
-                    return <Row className={'justify-content-center egreso'} key={entry.updatedAt + index}>
-                        <Col className='text-center'>{entry.concepto}</Col>
-                        <Col className='text-center'>${entry.entry}</Col>
-                        <Col className='text-center'>{new Date(entry.updatedAt).toLocaleDateString('es-ES', { hour: 'numeric', minute: 'numeric', second: 'numeric' })}</Col>
-                        <Col className='text-center'>EGRESO</Col>
-                        <Col className='text-center'>
-                            <Row className='justify-content-center'>
-                                <Col>
-                                    <Button variant='warning' onClick={() => HandleEdit(entry)}>
-                                        <PencilSquare />
-                                    </Button>
-                                </Col>
-                                <Col>
-                                    <Button variant='danger' onClick={() => {
-                                        HandleDelete(entry.idChecks)
-                                    }}>
-                                        <Trash />
-                                    </Button>
-                                </Col>
-                            </Row>
-                        </Col>
-                    </Row>
+                    return <Egreso entry={entry} index={index} HandleEdit={HandleEdit} HandleDelete={HandleDelete}/>
                 }
             }) : undefined}
             <Row className='text-center'>
@@ -144,15 +102,61 @@ const User = () => {
                 </Col>
                 <Col>
                     <fieldset className='text-center'>
-                        <Button className='text-center'
-                            variant='primary'
-                            onClick={() => {
-                                HandleClick()
-                            }}>AGREGAR</Button>
+                        <Button className='text-center'variant='primary' onClick={HandleClick}>AGREGAR</Button>
                     </fieldset>
                 </Col>
             </Row>
         </Col>
     </Col>
+}
+
+/////////////////////////////////////////////////Secondary Functions
+const Ingreso = ({entry, index,HandleEdit,HandleDelete}) => {
+    return <Row className={'justify-content-center ingreso'} key={entry.updatedAt + index}>
+    <Col className='text-center'>{entry.concepto}</Col>
+    <Col className='text-center'>${entry.entry.toFixed(2)}</Col>
+    <Col className='text-center'>{new Date(entry.updatedAt).toLocaleDateString('es-ES', { hour: 'numeric', minute: 'numeric', second: 'numeric' })}</Col>
+    <Col className='text-center'>INGRESO</Col>
+    <Col className='text-center'>
+        <Row className='justify-content-center'>
+            <Col>
+                <Button variant='warning' onClick={() => HandleEdit(entry)}>
+                    <PencilSquare />
+                </Button>
+            </Col>
+            <Col>
+                <Button variant='danger' onClick={() => {
+                    HandleDelete(entry.idChecks)
+                }}>
+                    <Trash />
+                </Button>
+            </Col>
+        </Row>
+    </Col>
+</Row>
+}
+const Egreso = ({entry, index,HandleEdit,HandleDelete}) => {
+    return <Row className={'justify-content-center egreso'} key={entry.updatedAt + index}>
+    <Col className='text-center'>{entry.concepto}</Col>
+    <Col className='text-center'>${entry.entry}</Col>
+    <Col className='text-center'>{new Date(entry.updatedAt).toLocaleDateString('es-ES', { hour: 'numeric', minute: 'numeric', second: 'numeric' })}</Col>
+    <Col className='text-center'>EGRESO</Col>
+    <Col className='text-center'>
+        <Row className='justify-content-center'>
+            <Col>
+                <Button variant='warning' onClick={() => HandleEdit(entry)}>
+                    <PencilSquare />
+                </Button>
+            </Col>
+            <Col>
+                <Button variant='danger' onClick={() => {
+                    HandleDelete(entry.idChecks)
+                }}>
+                    <Trash />
+                </Button>
+            </Col>
+        </Row>
+    </Col>
+</Row>
 }
 export default User

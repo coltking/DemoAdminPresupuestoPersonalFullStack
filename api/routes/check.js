@@ -1,8 +1,7 @@
 const router = require('express').Router();
 const {
-  User, Checks
+  Checks
 } = require('../db');
-
 const isAuthenticated = (req, res, next) => {
   if (req.user) {
     next()

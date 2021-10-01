@@ -2,9 +2,7 @@
 //no utilice contraseñas reales en esta aplicacion.
 const router = require('express').Router();
 const jwt = require('jsonwebtoken');
-const {
-  User, Checks
-} = require('../db');
+const { User } = require('../db');
 router.post('/login', async (req, res, next) => {
   const { email, password } = req.body
   const user = await User.findOne({
@@ -13,7 +11,6 @@ router.post('/login', async (req, res, next) => {
     }
   })
   if (user.password) {
-    console.log(user);
     if (user.password === password) {
       const token = jwt.sign(user.toJSON(), process.env.SECRET)
       res.send({
@@ -31,7 +28,6 @@ router.post('/login', async (req, res, next) => {
 })
 router.post('/register', async (req, res, next) => {
   try {
-
     await User.create({
       name: req.body.name,
       email: req.body.email,
@@ -39,9 +35,9 @@ router.post('/register', async (req, res, next) => {
     })
     console.log(result);
   } catch (error) {
-      if (error.errors[0].message === "email must be unique") {
-        res.status(401).send("El email ya se encuentra registrado.")
-      }
+    if (error.errors[0].message === "email must be unique") {
+      res.status(401).send("El email ya se encuentra registrado.")
+    }
   }
 })
 module.exports = router;

@@ -29,7 +29,7 @@ export const actionPostLogin = (email, password) => {
         }
     }
 }
-export const actionPostUserCheck = (idUser, concept, mount) => {
+export const actionPostUserCheck = (concept, mount) => {
     return (dispatch) => {
         const token = localStorage.getItem('token')
         axios.post(apiUrl + '/check', { concepto: concept, entry: mount }, { withCredentials: true, headers: { 'Authorization': 'Bearer '+token} }).then(

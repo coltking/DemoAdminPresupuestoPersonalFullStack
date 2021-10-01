@@ -4,55 +4,47 @@ import { useDispatch } from "react-redux"
 import { toast } from "react-toastify"
 import { actionUpdateCheck } from "../../../redux/userActions"
 const ModalEditCheck = ({ idCheck, initialMount, initialConcept, CloseModal, modalState }) => {
-    const [mount, setMount] = useState(0)
-    const [concept, setConcept] = useState('')
+    const [inputs, setInputs] = useState({
+        mount: 0,
+        concept: ''
+    })
+    const HandleChange = (e) => {
+        e.preventDefault()
+        setInputs({
+            ...inputs,
+            [e.target.name]: e.target.value
+        })
+    }
+    const HandleCancel = () => {
+        setInputs({ mount: 0, concept: '' })
+        CloseModal()
+    }
+    const HandleAccept = () => {
+        if ((initialMount < 1 && inputs.mount < 1) ||(initialMount >=1 && inputs.mount >= 1)){
+            dispatch(actionUpdateCheck(idCheck, inputs.concept, inputs.mount))
+            setInputs({ mount: 0, concept: '' })
+            CloseModal()
+        } else if (initialMount < 1){
+            toast("El valor no puede ser positivo.")
+        } else {
+            toast("El valor no puede ser negativo.")
+        }
+    }
     const dispatch = useDispatch()
     useEffect(() => {
-        setMount(initialMount)
-        setConcept(initialConcept)
+        setInputs({ mount: initialMount, concept: initialConcept })
     }, [initialMount, initialConcept])
     return <Modal show={modalState} onHide={CloseModal} dialogClassName="d-flex">
         <Modal.Header closeButton>
             <Modal.Title>EDITAR ENTRADA</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-            <Form.Control type='text'
-                value={concept}
-                onChange={(e) => {
-                    setConcept(e.target.value)
-                }} />
-            <Form.Control type='number'
-                value={mount}
-                onChange={(e) => {
-                    if (initialMount < 1) {
-                        if (e.target.value < 1) {
-                            setMount(e.target.value)
-                        } else {
-                            toast("El valor no puede ser positivo.")
-                        }
-                    } else {
-                        if (e.target.value >= 1) {
-                            setMount(e.target.value)
-                        } else {
-                            toast("El valor no puede ser negativo.")
-                        }
-                    }
-                }} />
+            <Form.Control type='text' name='concept' value={inputs.concept} onChange={HandleChange} />
+            <Form.Control type='number' name='mount' value={inputs.mount} onChange={HandleChange} />
         </Modal.Body>
         <Modal.Footer>
-            <Button variant="secondary"
-                onClick={() => {
-                    setMount(0)
-                    setConcept('')
-                    CloseModal()
-                }}>Cancelar</Button>
-            <Button variant="primary"
-                onClick={() => {
-                    dispatch(actionUpdateCheck(idCheck, concept, mount))
-                    setMount(0)
-                    setConcept('')
-                    CloseModal()
-                }}>Guardar Cambios</Button>
+            <Button variant="secondary" onClick={HandleCancel}>Cancelar</Button>
+            <Button variant="primary" onClick={HandleAccept}>Guardar Cambios</Button>
         </Modal.Footer>
     </Modal>
 }
