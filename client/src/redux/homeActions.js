@@ -9,7 +9,6 @@ export const actionPostNewUser = (name,email,password) => {
         axios.post(apiUrl + '/user/register', { name,email,password }, { withCredentials: true }).then(res => {
             dispatch(actionToast("Usuario registrado correctamente."))
         }).catch(error => {
-            console.log(error.message);
             if (error.message === "Request failed with status code 401") {
                 dispatch(actionToast("El email ya se encuentra registrado."))
             }
